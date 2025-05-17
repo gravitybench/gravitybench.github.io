@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents">
+  <meta name="keywords" content="GravityBench, Gravity-Bench, Physics Discovery, AI Agents, Benchmark">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+  <!-- <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+/Users/panlu/Library/Mobile Documents/com~apple~CloudDocs/ImageMath/visual-mathqa-server/data_final/images
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script> -->
+
+  <link rel="icon" href="./figures/flowchart5.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="stylesheet" href="./static/css/leaderboard.css"> --> <!-- Removed as leaderboard is simpler now -->
+
+  <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <!-- <script src="./static/js/explorer-index.js"></script> --> <!-- Removed -->
+  <!-- <script src="./static/js/question_card.js"></script> --> <!-- Removed -->
+
+  <script src="./static/js/gravitybench_scores.js" defer></script>
+
+  <!-- <script src="./visualizer/data/data_public.js" defer></script> --> <!-- Removed -->
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="#abstract">
+        Introduction
+      </a>
+      <a class="navbar-item" href="#dataset">
+        Benchmark Design
+      </a>
+      <a class="navbar-item" href="#leaderboard">
+        Leaderboard
+      </a>
+      <a class="navbar-item" href="#results">
+        Results
+      </a>
+       <a class="navbar-item" href="#BibTeX">
+        BibTeX
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title is-bold">
+            <span style="vertical-align: middle">Gravity-Bench-v1</span>
+            </h1>
+          <h2 class="subtitle is-3 publication-subtitle">
+            A Benchmark on Gravitational Physics Discovery for Agents
+          </h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Nolan Koblischke<sup>1</sup>,</span>
+            <span class="author-block">
+              Hyunseok Jang<sup>1</sup>,</span>
+            <span class="author-block">
+              Kristen Menou<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              Mohamad Ali-Dib<sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup style="color:#6fbf73;">1</sup>University of Toronto,</span>
+            <span class="author-block"><sup style="color:#ed4b82">2</sup>New York University Abu Dhabi</span>
+          </div>
+
+          <div class="has-text-centered" style="margin-top: 0.5em; margin-bottom: 0.5em;">
+            <span class="tag is-success is-large" style="background-color: #4caf50;">Accepted to ICML 2025</span>
+          </div>
+        
+          <!-- <section> -->
+            <!-- <div class="section" id="org-banners" style="display:fle">
+              <a href="https://www.ucla.edu/" target="_blank" rel="external">
+                  <img class="center-block org-banner" src="static/images/ucla.png" style="height:3em">
+              </a>
+              <a href="https://www.washington.edu/" target="blank" class="ext-link">
+                  <img class="center-block org-banner" src="static/images/uw.png" style="height:3em">
+              </a>
+              <a href="https://www.microsoft.com/en-us/research/" target="_blank" rel="external">
+                  <img class="center-block org-banner" src="static/images/microsoft.png" style="height:3em">
+              </a>
+            </div> -->
+          <!-- </section> -->
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2501.18411"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/NolanKoblischke/GravityBench"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="#dataset"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:18px">🏆</p>
+                  </span>
+                  <span>Benchmark</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#results"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:18px">🔮</p>
+                  </span>
+                  <span>Results</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#leaderboard"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:18px">📊</p>
+                  </span>
+                  <span>Leaderboard</span>
+                </a>
+              </span>
+              <!-- Twitter Link. -->
+              <!-- <span class="link-block">
+                <a href="https://twitter.com/lupantech/status/1717313355780964608"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:18px">🌐</p>
+                  </span>
+                  <span>Twitter</span>
+                </a>
+              </span> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="content has-text-centered">
+      <img src="static/images/tease_scores_gpt4v.png" alt="geometric reasoning" width="99%"/>
+      <p> Accuracy scores of one leading LLM (i.e., PoT GPT-4), four primary LMMs, random chance, and human performance our proposed
+      <img src="static/images/mathvista.png" style="width:1.0em;vertical-align: middle" alt="Logo"/>
+      <span class="mathvista">MathVista</span>
+      across mathematical reasoning and visual context types. PoT refers to program-of-thought prompting, and PoT GPT-4 is a textual LLM augmented with the caption and OCR text. GPT-4V is manually evaluated via the playground chatbot.
+      </p>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section" id="abstract">
+  <div class="container" style="margin-bottom: 1vh;">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+          Gravity-Bench-v1 is an environment-based benchmark challenging AI agents to discover physics in dynamic, rigorous gravitational simulations, paralleling historical scientific development.
+          </p>
+          <p>
+            It tests generalization with out-of-distribution physics, requiring agents to plan data collection under budget and perform dynamic analysis. PhD-level solutions offer human expertise calibration.
+          </p>
+          <p>
+            Challenging for baseline AI agents, Gravity-Bench-v1 aims to map AI progress in scientific discovery. Inspired by historical science, it uses high-fidelity simulations for interactive experiments. Agents engage in the full scientific process: scheduling observations within budget and making inferences from accumulating data, assessing autonomous decision-making under uncertainty.
+          </p>
+           <div class="content has-text-centered" style="margin-top: 1em; margin-bottom: 1em;">
+              <img src="figures/flowchart5.png" alt="GravityBench Flowchart" width="80%"/>
+              <p><b>Overview of Gravity-Bench-v1 architecture and workflow.</b> (Corresponds to Figure 1 in the paper)</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+        <h2 class="title is-3" id="leaderboard">Leaderboard for Gravity-Bench-v1</h2>
+        <div class="content">
+          <p class="mt-3">Performance of baseline AI agents on <b>Gravity-Bench-v1</b> tasks, based on Table 1 from the paper.
+            <br>Results are averaged over three runs with standard errors shown, unless marked with †.
+            <br>†Preliminary results shown for a single full-obs run of o1. 17/206 problems were refused by the o1 API due to content policy flags, which we remove from this analysis. All other models completed full 206-task evaluations.
+          </p>
+
+          <h3 class="title is-4">100 Observation Budget (budget-obs-100)</h3>
+          <div id="leaderboard_budget_obs" class="table-container"></div>
+
+          <h3 class="title is-4" style="margin-top: 1em;">Full Table of Observations (full-obs)</h3>
+          <div id="leaderboard_full_obs" class="table-container"></div>
+
+          <script>
+            function generateGravityBenchTable(data, tableId) {
+              if (!data || data.length === 0) {
+                document.getElementById(tableId).innerHTML = "<p>Data not available.</p>";
+                return;
+              }
+              let tableHtml = '<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">';
+              tableHtml += '<thead><tr>';
+              const headers = Object.keys(data[0]);
+              headers.forEach(header => {
+                tableHtml += `<th>${header}</th>`;
+              });
+              tableHtml += '</tr></thead>';
+              tableHtml += '<tbody>';
+              data.forEach(row => {
+                tableHtml += '<tr>';
+                headers.forEach(header => {
+                  // Bold the best performance in each table
+                  let cellContent = row[header];
+                  if (tableId === 'leaderboard_budget_obs' && header === 'Performance' && row.Model === 'claude-3-5-sonnet-20241022') {
+                     cellContent = `<strong>${row[header]}</strong>`;
+                  } else if (tableId === 'leaderboard_full_obs' && header === 'Performance' && row.Model === 'o1-2024-12-17'){
+                     cellContent = `<strong>${row[header]}</strong>`;
+                  }
+                  tableHtml += `<td>${cellContent}</td>`;
+                });
+                tableHtml += '</tr>';
+              });
+              tableHtml += '</tbody></table>';
+              document.getElementById(tableId).innerHTML = tableHtml;
+            }
+
+            window.addEventListener('load', () => {
+                if (typeof gravitybench_budget_obs_100_scores !== 'undefined') {
+                    generateGravityBenchTable(gravitybench_budget_obs_100_scores, 'leaderboard_budget_obs');
+                }
+                if (typeof gravitybench_full_obs_scores !== 'undefined') {
+                    generateGravityBenchTable(gravitybench_full_obs_scores, 'leaderboard_full_obs');
+                }
+            });
+          </script>
+
+          <b>Task types:</b> Refer to paper Section 3.2 and Appendix B for details on scientific problems.
+          <br>
+          <b>Evaluation:</b> Refer to paper Section 4.1 for evaluation details and thresholding.
+          <br>
+          <br>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+    <hr/> <!-- Visual separator -->
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">
+      <span style="vertical-align: middle">Gravity-Bench-v1 Environment & Tasks</span>
+    </h1>
+  </div>
+</section>
+
+<section class="section" id="dataset">
+  <div class="container">
+    <div class="columns is-centered">
+        <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Benchmark Design</h2>
+        <div class="content has-text-justified">
+          <p>
+            Gravity-Bench-v1 is an environment-based benchmark designed to evaluate the scientific reasoning and discovery capabilities of AI agents within a controlled, physics-based environment.
+            The core design principle behind our benchmark is the concept of a rigorously-simulated, partially-observable environment. The engine driving our environment is a science-grade physics simulation tool, <a href="https://rebound.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">Rebound</a>, the current gold standard for gravitational few-body dynamics.
+          </p>
+          <div class="columns is-vcentered">
+            <div class="column is-half">
+                <h4 class="title is-4 has-text-left">Environment Design Features:</h4>
+                <ul style="list-style-position: inside; text-align: left;">
+                    <li><b>Focused subdomain expertise:</b> The simulation targets 2-body gravitational physics. Implicit knowledge (e.g. Kepler's 3rd law) can be leveraged.</li>
+                    <li><b>Ground truth embedding:</b> The environment encodes ground truth in the form of input simulation parameters impacting dynamics.</li>
+                    <li><b>Limitless data generation:</b> The simulation engine can generate virtually unlimited data for diverse evaluations.</li>
+                    <li><b>Modular partial observability:</b> Various observation protocols sparsify densely simulated data.</li>
+                    <li><b>Out-of-distribution generalization:</b> Enables simulation scenarios beyond real-world physics to test generalization.</li>
+                </ul>
+            </div>
+            <div class="column is-half">
+              <figure class="image">
+                <img src="figures/flowchart5.png" alt="Benchmark Flowchart (Fig 1)"/>
+              </figure>
+              <p class="has-text-centered" style="font-style: italic;">Figure 1: Overview of Gravity-Bench-v1 architecture and workflow.</p>
+            </div>
+          </div>
+          <h4 class="title is-4 has-text-centered" style="margin-top:1em;">Observation Protocol and Tool</h4>
+          <p>
+            All orbits are in the (x,y) Cartesian plane (z=0). We adopt two environment observation protocols, mediated by an observation tool:
+            <ul style="list-style-position: inside; margin-left: 2em;">
+              <li><b>full-obs:</b> The agent has access to the full dense set of simulation data.</li>
+              <li><b>budget-obs:</b> The agent is permitted a maximum of $N_{\rm obs}=100$ observations within the simulation time range. The agent can choose observation times, up to 10 data points per tool call. This incentivizes strategic observation and iterative reasoning.</li>
+            </ul>
+            The agent repeatedly queries the observation tool, and the tool returns corresponding data, appending to previously-collected observations.
+          </p>
+          <h4 class="title is-4 has-text-centered" style="margin-top:1em;">Scientific Problems & Simulations</h4>
+          <p>
+            Binary star systems (point masses) offer a rich abstraction for tasks involving inferring hidden physical properties from limited data. We designed a diverse set of 16 two-body gravitational simulations, incorporating symmetry-breaking strategies (e.g., displaced center of mass, proper motion) and out-of-distribution physics (drag forces, modified gravity $F_G \propto r^{-(2+\alpha)}$). From these, we designed 50 tasks (47 numeric, 3 true/false), totaling 206 task-simulation pairs.
+          </p>
+          <figure class="image" style="margin-top:1em;">
+            <img src="figures/Simulations.png" alt="Overview of Simulations (Fig 2)"/>
+            <figcaption class="has-text-centered" style="font-style: italic;">Figure 2: Overview of the gravitational simulations used in the benchmark. Each panel shows orbital trajectories with masses in $M_\odot$. Color indicates time. Includes standard orbits, unbound systems, modified gravity, drag forces, proper motion, and varied units.</figcaption>
+          </figure>
+          <p style="margin-top:1em;">
+            Tasks are designed to be solvable only through careful derivation requiring success at multiple intermediate steps. For example, determining total system energy requires finding stellar masses, which in turn need acceleration and separation estimates. Refer to Appendix B of the paper for a full list of tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <hr/> <!-- Visual separator -->
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">Experiment Results & Analysis</h1>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Performance of Baseline Agents</h2>
+        <div class="content has-text-justified">
+          <p>
+            We tested OpenAI and Anthropic models using a ReAct-style agent with an `observe` tool and Python interpreter. Performance is summarized in the <a href="#leaderboard">Leaderboard section</a> below (based on Table 1 from the paper). Key findings show that while o1 achieves high performance with full observations, all models struggle under the 100-observation budget, indicating challenges in observational planning and long-horizon reasoning.
+          </p>
+          <p>
+            Impressively, o1 consistently solves two of our six out-of-distribution tasks in full-obs, including estimating a modified gravity exponent ($F_G \propto r^{-(2+\alpha)}$), suggesting some generalization to novel physics. Claude 3.5 Sonnet also solves one modified gravity task.
+          </p>
+          <h4 class="title is-4 has-text-centered" style="margin-top:1em;">Evaluation Details & Task Thresholds</h4>
+          <p>
+            PhD-level solutions are implemented for each task. For budget-obs-100, we use $N_{\rm obs}=100$ uniformly spaced observations (human-ref-100) as a non-planning baseline. An answer is correct if its percentage error is below a task-specific threshold. These thresholds are set based on the performance gap between our PhD solution with full data vs. 100 uniform observations. Lenient thresholds (e.g., 70% for modified gravity exponent $\alpha$) are set for hard tasks but are achievable with expert planning (e.g., $\alpha$ to 1.7% error with 70 planned observations).
+          </p>
+          <figure class="image" style="margin-top:1em;">
+            <img src="figures/defining_threshold_100_obs.png" alt="Defining Task Thresholds (Fig A2 from Appendix)"/>
+            <figcaption class="has-text-centered" style="font-style: italic;">Figure A.2 (from Appendix): Task-specific thresholds for budget-obs-100. Based on PhD-level solution performance with 100 uniform observations vs. full data. Red lines mark chosen thresholds.</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="title is-3 has-text-centered" style="margin-top:1.5em;">Analysis of Planning and Failure Modes</h3>
+        <div class="content has-text-justified">
+          <h4 class="title is-4 has-text-centered">Observational Planning</h4>
+          <p>
+            Efficiently solving problems under an observation budget requires elaborate planning, especially for tasks like finding a star's maximum velocity or minimum separation (periastron), which occur over small orbital fractions. Uniform sampling is often insufficient.
+          </p>
+          <div class="columns is-vcentered is-multiline">
+            <div class="column is-full">
+              <figure class="image">
+                <img src="figures/max_velocity_and_periastron.png" alt="Max Velocity and Periastron Performance (Fig 3)"/>
+              </figure>
+              <p class="has-text-centered" style="font-style: italic;">Figure 3: Agent performance in finding maximum velocity (left, center-left) and periastron distance (center-right, right) under various budgets. Models often underutilize their observation budget, stopping early. Claude 3.5 Sonnet sometimes achieves low error due to better planning.</p>
+            </div>
+            <div class="column is-full">
+              <figure class="image" style="margin-top:1em;">
+                 <img src="figures/traces.png" alt="Observation Planning Traces by Claude 3.5 Sonnet (Fig 4)"/>
+                <figcaption class="has-text-centered" style="font-style: italic;">Figure 4: Two observation-planning runs by Claude 3.5 Sonnet for max velocity (40 observations). Minor planning differences lead to vastly different outcomes (2% error vs. 45% error). Effective planning iteratively refines observations near peak velocity.</figcaption>
+              </figure>
+            </div>
+            <div class="column is-full">
+              <p style="margin-top:1em;">
+                A case study on finding the periastron in a highly elliptical orbit (Appendix D, Figure A.1) further highlights this. Uniform sampling yields 72% error, while an expert strategy achieves 2% error with 50 observations. AI agents often fixate on early, non-minimal separations.
+              </p>
+              <figure class="image" style="margin-top:1em;">
+                <img src="figures/periastron_claude_v_expert.png" alt="Periastron Finding: Uniform vs. Expert (Fig A1 from Appendix)"/>
+                <figcaption class="has-text-centered" style="font-style: italic;">Figure A.1 (from Appendix): Comparison of observation strategies for finding periastron. Claude 3.5 Sonnet with uniform sampling (left) misses the periastron (93% error). An expert solution (right) adaptively samples to achieve 2% error.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <h4 class="title is-4 has-text-centered" style="margin-top:1em;">Failure Modes</h4>
+          <p>
+            Models often incorrectly assume system symmetries (e.g., center of mass at origin) or neglect system drift (proper motion). They also tend to take shortcuts, like assuming stellar masses instead of deriving them. For instance, GPT-4o makes mass assumptions in 33% of incorrect solutions versus 5% of correct ones. This indicates a lack of systematic derivation of intermediate quantities.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <hr/> <!-- Visual separator -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <hr/> <!-- Visual separator -->
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">BibTeX</h2>
+    <pre><code>@article{koblischke2025gravitybench,
+  author    = {Nolan Koblischke and Hyunseok Jang and Kristen Menou and Mohamad Ali-Dib},
+  title     = {Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents},
+  journal   = {arXiv preprint arXiv:xxxx.xxxxx}, % Placeholder: Add arXiv ID when available
+  year      = {2025} % Or actual publication year
+}</code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="section" id="org-banners" style="display:flex; justify-content: center; align-items: center; padding-top: 1em; padding-bottom: 0.5em;">
+    <!-- University logos removed -->
+  </div>
+</section>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        Website adapted from the <a href="https://nerfies.github.io/" target="_blank" rel="noopener noreferrer">Nerfies</a> project page, licensed under a <a rel="license"
+                                            href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative
+        Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
+      <p>Please contact <a href="mailto:nolan.koblischke@mail.utoronto.ca">Nolan Koblischke</a> or <a href="mailto:kristen.menou@utoronto.ca">Kristen Menou</a> with any questions or feedback.</p>
+    </div>
+</footer>
+
+</body>
+</html>
+
+
