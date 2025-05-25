@@ -6,7 +6,7 @@
         content="Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents">
   <meta name="keywords" content="GravityBench, Gravity-Bench, Physics Discovery, AI Agents, Benchmark">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents</title>
+  <title>GravityBench: A Rigorous Benchmark for Evaluating Scientific Discovery in AI Agents</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
@@ -46,6 +46,23 @@
   <!-- <script src="./static/js/question_card.js"></script> --> <!-- Removed -->
 
   <script src="./static/js/gravitybench_scores.js" defer></script>
+
+  <!-- MathJax Configuration for LaTeX rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <!-- <script src="./visualizer/data/data_public.js" defer></script> --> <!-- Removed -->
 </head>
@@ -87,10 +104,10 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title is-bold">
-            <span style="vertical-align: middle">Gravity-Bench-v1</span>
+            <span style="vertical-align: middle">GravityBench</span>
             </h1>
           <h2 class="subtitle is-3 publication-subtitle">
-            A Benchmark on Gravitational Physics Discovery for Agents
+            A Rigorous Benchmark for Evaluating Scientific Discovery in AI Agents
           </h2>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
@@ -132,7 +149,8 @@
             <div class="publication-links">
               <span class="link-block">
                 <a href="https://arxiv.org/abs/2501.18411"
-                   class="external-link button is-normal is-rounded is-dark">
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
@@ -141,7 +159,8 @@
               </span>
               <span class="link-block">
                 <a href="https://github.com/NolanKoblischke/GravityBench"
-                   class="external-link button is-normal is-rounded is-dark">
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
@@ -149,21 +168,13 @@
                   </a>
               </span>
               <span class="link-block">
-                <a href="#dataset"
-                   class="external-link button is-normal is-rounded is-dark">
+                <a href="https://huggingface.co/datasets/GravityBench/GravityBench"
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank">
                   <span class="icon">
-                      <p style="font-size:18px">🏆</p>
+                      <p style="font-size:18px">🤗</p>
                   </span>
-                  <span>Benchmark</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#results"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <p style="font-size:18px">🔮</p>
-                  </span>
-                  <span>Results</span>
+                  <span>Dataset</span>
                 </a>
               </span>
               <span class="link-block">
@@ -210,24 +221,16 @@
 
 
 <section class="section" id="abstract">
-  <div class="container" style="margin-bottom: 1vh;">
+  <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Introduction</h2>
-        <div class="content has-text-justified">
-          <p>
-          Gravity-Bench-v1 is an environment-based benchmark challenging AI agents to discover physics in dynamic, rigorous gravitational simulations, paralleling historical scientific development.
-          </p>
-          <p>
-            It tests generalization with out-of-distribution physics, requiring agents to plan data collection under budget and perform dynamic analysis. PhD-level solutions offer human expertise calibration.
-          </p>
-          <p>
-            Challenging for baseline AI agents, Gravity-Bench-v1 aims to map AI progress in scientific discovery. Inspired by historical science, it uses high-fidelity simulations for interactive experiments. Agents engage in the full scientific process: scheduling observations within budget and making inferences from accumulating data, assessing autonomous decision-making under uncertainty.
-          </p>
-           <div class="content has-text-centered" style="margin-top: 1em; margin-bottom: 1em;">
-              <img src="figures/flowchart5.png" alt="GravityBench Flowchart" width="80%"/>
-              <p><b>Overview of Gravity-Bench-v1 architecture and workflow.</b> (Corresponds to Figure 1 in the paper)</p>
-            </div>
+        <div class="narrow-text-block">
+          <!-- <h2 class="title is-3">Abstract</h2> -->
+          <div class="content has-text-justified">
+            <p>
+              <strong>Abstract:</strong> GravityBench is an environment-based benchmark designed to evaluate the abilities of AI agents to autonomously discover gravitational physics. It challenges agents to engage in a full cycle of scientific discovery, including hypothesis formation, experimental planning under limited resources, data analysis, and evidence-driven reasoning. GravityBench features physics simulations that deviate from real-world gravitational laws, allowing robust evaluation of agent generalization. Baseline experiments indicate current leading AI models struggle significantly with planning strategically under uncertainty. GravityBench aims to provide clear, rigorous insight into agents' capabilities and limitations in scientific reasoning and discovery.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -238,11 +241,10 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full has-text-centered content">
-        <h2 class="title is-3" id="leaderboard">Leaderboard for Gravity-Bench-v1</h2>
+        <!-- <h2 class="title is-3" id="leaderboard">Leaderboard for GravityBench</h2> -->
         <div class="content">
-          <p class="mt-3">Performance of baseline AI agents on <b>Gravity-Bench-v1</b> tasks, based on Table 1 from the paper.
-            <br>Results are averaged over three runs with standard errors shown, unless marked with †.
-            <br>†Preliminary results shown for a single full-obs run of o1. 17/206 problems were refused by the o1 API due to content policy flags, which we remove from this analysis. All other models completed full 206-task evaluations.
+          <p class="mt-3">Performance of baseline AI agents on <b>GravityBench</b> tasks, based on Table 1 from the paper.
+            <br>Results are averaged over three runs with standard errors shown.
           </p>
 
           <h3 class="title is-4">100 Observation Budget (budget-obs-100)</h3>
@@ -270,9 +272,9 @@
                 headers.forEach(header => {
                   // Bold the best performance in each table
                   let cellContent = row[header];
-                  if (tableId === 'leaderboard_budget_obs' && header === 'Performance' && row.Model === 'claude-3-5-sonnet-20241022') {
+                  if (tableId === 'leaderboard_budget_obs' && header === 'Performance' && row.Model === 'o4-mini-high-2025-04-16') {
                      cellContent = `<strong>${row[header]}</strong>`;
-                  } else if (tableId === 'leaderboard_full_obs' && header === 'Performance' && row.Model === 'o1-2024-12-17'){
+                  } else if (tableId === 'leaderboard_full_obs' && header === 'Performance' && row.Model === 'o4-mini-high-2025-04-16'){
                      cellContent = `<strong>${row[header]}</strong>`;
                   }
                   tableHtml += `<td>${cellContent}</td>`;
@@ -304,170 +306,293 @@
     </div>
   </div>
 </section>
+
+<section class="section" id="introduction">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="narrow-text-block">
+          <!-- <h2 class="title is-3">Introduction</h2> -->
+          <div class="content has-text-justified">
+            <p>
+              Recent AI advances have substantially improved performance in language, math, and even scientific literature analysis. However, genuine "scientific reasoning", involving iterative hypothesis testing, active experimentation, and systematic data-driven inference under meaningful uncertainty, remains poorly understood. Understanding agents' capabilities for scientific discovery is practically crucial—it could enable autonomous scientific progress or highlight serious limitations of existing architectures.
+            </p>
+            
+            <p>
+              This paper introduces GravityBench, a controlled environment benchmark rigorously designed to evaluate the capability of AI agents in discovering gravitational physics. GravityBench challenges agents to actively reason about observations, plan strategically under resource constraints, and generalize beyond familiar textbook knowledge.
+            </p>
+            
+            <p>
+              We believe current limitations in these areas reflect profound gaps in AI agents' understanding of the scientific discovery process itself. To help the community characterize and ultimately bridge these gaps, we contribute GravityBench as a carefully designed, transparent, and fully open-source platform.
+            </p>
+          </div>
+        </div>
+        <div class="content has-text-centered" style="margin-top: 1em; margin-bottom: 1em;">
+          <img src="figures/flowchart5.png" alt="GravityBench Flowchart" width="80%"/>
+          <p><b>Overview of GravityBench architecture and workflow.</b> (Corresponds to Figure 1 in the paper)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="novelty">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="narrow-text-block">
+          <h2 class="custom-heading">Novel Contributions</h2>
+          <div class="content has-text-justified">
+            <ul>
+              <li><strong>Rigorous Simulated Environment:</strong> GravityBench uses high-precision gravitational simulations designed specifically to evaluate scientific reasoning and discovery.</li>
+              <li><strong>Comprehensive Evaluation of Scientific Reasoning:</strong> Extends evaluation beyond standard question-answering to include experimental design, iterative data collection, and dealing with uncertainty.</li>
+              <li><strong>Robust Generalization Tests:</strong> Introduces tasks requiring agents to reason effectively in scenarios explicitly outside standard physics (e.g., modified gravitational laws), enabling clearer measurement of agents' ability to generalize scientifically rather than memorizing common textbook results.</li>
+              <li><strong>Direct Benchmarking against Expert Solutions:</strong> Provides expert (PhD-level astrophysics) reference solutions, enabling precise scoring and interpretability of agents' errors and strengths.</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Expandable Trace Image -->
+        <div style="margin-top: 0.5em; margin-bottom: 0.5em;">
+          <p class="content is-size-6 narrow-text-block" style="margin-bottom: 0.4em;">The trace below shows two illustrative observation-planning runs by Claude 3.5 Sonnet attempting to find the maximum stellar velocity with a 40-observation budget: one run systematically refines its estimate to achieve 2% error, while the other misinterprets velocity estimates from finer time resolution and incurs a 45% error due to poorly targeted subsequent observations.</p>
+          <div class="has-text-left narrow-text-block" style="margin-bottom: 0.2em;">
+            <button class="button is-light is-small" onclick="toggleTrace()">See trace</button>
+          </div>
+          <div id="trace-image-container" style="display: none; margin-top: 0.2em;">
+            <figure class="image">
+              <img src="figures/traces.png" alt="Example Trace from Analysis" />
+            </figure>
+          </div>
+        </div>
+
+        <script>
+          function toggleTrace() {
+            var traceContainer = document.getElementById('trace-image-container');
+            if (traceContainer.style.display === 'none') {
+              traceContainer.style.display = 'block';
+            } else {
+              traceContainer.style.display = 'none';
+            }
+          }
+        </script>
+        <!-- End Expandable Trace Image -->
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container is-max-desktop">
     <hr/> <!-- Visual separator -->
   </div>
 </section>
 
-<section class="hero is-light is-small">
+<!-- <section class="hero is-light is-small">
   <div class="hero-body has-text-centered">
     <h1 class="title is-1">
       <span style="vertical-align: middle">Gravity-Bench-v1 Environment & Tasks</span>
     </h1>
   </div>
-</section>
+</section> -->
 
 <section class="section" id="dataset">
-  <div class="container">
+  <div class="container is-max-desktop">
     <div class="columns is-centered">
         <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Benchmark Design</h2>
-        <div class="content has-text-justified">
-          <p>
-            Gravity-Bench-v1 is an environment-based benchmark designed to evaluate the scientific reasoning and discovery capabilities of AI agents within a controlled, physics-based environment.
-            The core design principle behind our benchmark is the concept of a rigorously-simulated, partially-observable environment. The engine driving our environment is a science-grade physics simulation tool, <a href="https://rebound.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">Rebound</a>, the current gold standard for gravitational few-body dynamics.
-          </p>
-          <div class="columns is-vcentered">
-            <div class="column is-half">
-                <h4 class="title is-4 has-text-left">Environment Design Features:</h4>
-                <ul style="list-style-position: inside; text-align: left;">
-                    <li><b>Focused subdomain expertise:</b> The simulation targets 2-body gravitational physics. Implicit knowledge (e.g. Kepler's 3rd law) can be leveraged.</li>
-                    <li><b>Ground truth embedding:</b> The environment encodes ground truth in the form of input simulation parameters impacting dynamics.</li>
-                    <li><b>Limitless data generation:</b> The simulation engine can generate virtually unlimited data for diverse evaluations.</li>
-                    <li><b>Modular partial observability:</b> Various observation protocols sparsify densely simulated data.</li>
-                    <li><b>Out-of-distribution generalization:</b> Enables simulation scenarios beyond real-world physics to test generalization.</li>
-                </ul>
-            </div>
-            <div class="column is-half">
-              <figure class="image">
-                <img src="figures/flowchart5.png" alt="Benchmark Flowchart (Fig 1)"/>
-              </figure>
-              <p class="has-text-centered" style="font-style: italic;">Figure 1: Overview of Gravity-Bench-v1 architecture and workflow.</p>
+          <div class="narrow-text-block">
+            <h2 class="custom-heading">Benchmark Design and Methodology</h2>
+            <div class="content has-text-justified">
+              <p>
+                We designed detailed gravitational two-body system simulations incorporating factors such as displacement of the center-of-mass, proper motion, drag forces, and modified gravitational laws (with power-law exponents differing from Newtonian gravity). Each of these distinctive scenarios tests not only raw scientific reasoning skill but also the strategies used by the model during experimentation and discovery.
+              </p>
+
+              <p>
+                Agents interact through an observation interface, capable of providing up to 100 data-points over a set simulation runtime. To succeed, agents must identify which measurements would most effectively reduce uncertainty, reflecting crucial scientific reasoning skills.
+              </p>
+
+              <p>
+                We define problem-specific accuracy thresholds based on comparison to expert solutions, modeling realistic experimental limitations rather than arbitrary correctness criteria.
+              </p>
             </div>
           </div>
-          <h4 class="title is-4 has-text-centered" style="margin-top:1em;">Observation Protocol and Tool</h4>
-          <p>
-            All orbits are in the (x,y) Cartesian plane (z=0). We adopt two environment observation protocols, mediated by an observation tool:
-            <ul style="list-style-position: inside; margin-left: 2em;">
-              <li><b>full-obs:</b> The agent has access to the full dense set of simulation data.</li>
-              <li><b>budget-obs:</b> The agent is permitted a maximum of $N_{\rm obs}=100$ observations within the simulation time range. The agent can choose observation times, up to 10 data points per tool call. This incentivizes strategic observation and iterative reasoning.</li>
-            </ul>
-            The agent repeatedly queries the observation tool, and the tool returns corresponding data, appending to previously-collected observations.
-          </p>
-          <h4 class="title is-4 has-text-centered" style="margin-top:1em;">Scientific Problems & Simulations</h4>
-          <p>
-            Binary star systems (point masses) offer a rich abstraction for tasks involving inferring hidden physical properties from limited data. We designed a diverse set of 16 two-body gravitational simulations, incorporating symmetry-breaking strategies (e.g., displaced center of mass, proper motion) and out-of-distribution physics (drag forces, modified gravity $F_G \propto r^{-(2+\alpha)}$). From these, we designed 50 tasks (47 numeric, 3 true/false), totaling 206 task-simulation pairs.
-          </p>
           <figure class="image" style="margin-top:1em;">
             <img src="figures/Simulations.png" alt="Overview of Simulations (Fig 2)"/>
             <figcaption class="has-text-centered" style="font-style: italic;">Figure 2: Overview of the gravitational simulations used in the benchmark. Each panel shows orbital trajectories with masses in $M_\odot$. Color indicates time. Includes standard orbits, unbound systems, modified gravity, drag forces, proper motion, and varied units.</figcaption>
           </figure>
-          <p style="margin-top:1em;">
-            Tasks are designed to be solvable only through careful derivation requiring success at multiple intermediate steps. For example, determining total system energy requires finding stellar masses, which in turn need acceleration and separation estimates. Refer to Appendix B of the paper for a full list of tasks.
-          </p>
         </div>
-      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <hr/> <!-- Visual separator -->
-  </div>
-</section>
-
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1">Experiment Results & Analysis</h1>
-  </div>
-</section>
 
 <section class="section" id="results">
-  <div class="container">
+  <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Performance of Baseline Agents</h2>
-        <div class="content has-text-justified">
-          <p>
-            We tested OpenAI and Anthropic models using a ReAct-style agent with an `observe` tool and Python interpreter. Performance is summarized in the <a href="#leaderboard">Leaderboard section</a> below (based on Table 1 from the paper). Key findings show that while o1 achieves high performance with full observations, all models struggle under the 100-observation budget, indicating challenges in observational planning and long-horizon reasoning.
-          </p>
-          <p>
-            Impressively, o1 consistently solves two of our six out-of-distribution tasks in full-obs, including estimating a modified gravity exponent ($F_G \propto r^{-(2+\alpha)}$), suggesting some generalization to novel physics. Claude 3.5 Sonnet also solves one modified gravity task.
-          </p>
-          <h4 class="title is-4 has-text-centered" style="margin-top:1em;">Evaluation Details & Task Thresholds</h4>
-          <p>
-            PhD-level solutions are implemented for each task. For budget-obs-100, we use $N_{\rm obs}=100$ uniformly spaced observations (human-ref-100) as a non-planning baseline. An answer is correct if its percentage error is below a task-specific threshold. These thresholds are set based on the performance gap between our PhD solution with full data vs. 100 uniform observations. Lenient thresholds (e.g., 70% for modified gravity exponent $\alpha$) are set for hard tasks but are achievable with expert planning (e.g., $\alpha$ to 1.7% error with 70 planned observations).
-          </p>
-          <figure class="image" style="margin-top:1em;">
-            <img src="figures/defining_threshold_100_obs.png" alt="Defining Task Thresholds (Fig A2 from Appendix)"/>
-            <figcaption class="has-text-centered" style="font-style: italic;">Figure A.2 (from Appendix): Task-specific thresholds for budget-obs-100. Based on PhD-level solution performance with 100 uniform observations vs. full data. Red lines mark chosen thresholds.</figcaption>
-          </figure>
+        <div class="narrow-text-block">
+          <h2 class="custom-heading">Key Experimental Results and Insights</h2>
+          <div class="content has-text-justified">
+            <p>
+              Our experiments with baseline agents—including state-of-the-art models GPT-4o and Claude 3.5—show these systems consistently fail at careful experimental planning, significantly underusing their observation budgets. Overall performance dropped drastically when limited by observation budgets:
+            </p>
+
+            <ul>
+              <li><strong>Under full-data access:</strong> The top model (o4-mini-high) achieved 74%, demonstrating moderate baseline capabilities in reasoning given abundant data.</li>
+              <li><strong>Under limited observation budget:</strong> Performance dropped sharply, highlighting significant weaknesses in active information gathering and strategic reasoning under uncertainty.</li>
+            </ul>
+
+            <p>
+              Detailed qualitative analysis identified problematic shortcuts such as unjustified assumptions of symmetry and ungrounded physical constants (e.g. arbitrary mass assumptions). These systematic errors illustrate deeper misunderstandings of the iterative, uncertainty-driven nature of realistic scientific discovery.
+            </p>
+
+            <p>
+              A single demonstration of highly capable generalization was observed: o4-mini-high successfully reasoned about novel gravity deviations (modified exponent cases). Yet even this model showed no coherent strategy for planning observational budgets, underscoring systemic gaps there.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Expandable Trace Image -->
+        <div style="margin-top: 1.5em; margin-bottom: 1.5em;">
+          <p class="content is-size-6 narrow-text-block" style="margin-bottom: 0.75em;">The trace below shows two illustrative observation-planning runs by Claude 3.5 Sonnet attempting to find the maximum stellar velocity with a 40-observation budget: one run systematically refines its estimate to achieve 2% error, while the other misinterprets velocity estimates from finer time resolution and incurs a 45% error due to poorly targeted subsequent observations.</p>
+          <div class="has-text-left narrow-text-block" style="margin-bottom: 0.5em;">
+            <button class="button is-light is-small" onclick="toggleTrace()">See trace</button>
+          </div>
+          <div id="trace-image-container" style="display: none; margin-top: 0.5em;">
+            <figure class="image">
+              <img src="figures/traces.png" alt="Example Trace from Analysis" />
+            </figure>
+          </div>
         </div>
 
-        <h3 class="title is-3 has-text-centered" style="margin-top:1.5em;">Analysis of Planning and Failure Modes</h3>
-        <div class="content has-text-justified">
-          <h4 class="title is-4 has-text-centered">Observational Planning</h4>
-          <p>
-            Efficiently solving problems under an observation budget requires elaborate planning, especially for tasks like finding a star's maximum velocity or minimum separation (periastron), which occur over small orbital fractions. Uniform sampling is often insufficient.
-          </p>
-          <div class="columns is-vcentered is-multiline">
-            <div class="column is-full">
-              <figure class="image">
-                <img src="figures/max_velocity_and_periastron.png" alt="Max Velocity and Periastron Performance (Fig 3)"/>
-              </figure>
-              <p class="has-text-centered" style="font-style: italic;">Figure 3: Agent performance in finding maximum velocity (left, center-left) and periastron distance (center-right, right) under various budgets. Models often underutilize their observation budget, stopping early. Claude 3.5 Sonnet sometimes achieves low error due to better planning.</p>
-            </div>
-            <div class="column is-full">
-              <figure class="image" style="margin-top:1em;">
-                 <img src="figures/traces.png" alt="Observation Planning Traces by Claude 3.5 Sonnet (Fig 4)"/>
-                <figcaption class="has-text-centered" style="font-style: italic;">Figure 4: Two observation-planning runs by Claude 3.5 Sonnet for max velocity (40 observations). Minor planning differences lead to vastly different outcomes (2% error vs. 45% error). Effective planning iteratively refines observations near peak velocity.</figcaption>
-              </figure>
-            </div>
-            <div class="column is-full">
-              <p style="margin-top:1em;">
-                A case study on finding the periastron in a highly elliptical orbit (Appendix D, Figure A.1) further highlights this. Uniform sampling yields 72% error, while an expert strategy achieves 2% error with 50 observations. AI agents often fixate on early, non-minimal separations.
-              </p>
-              <figure class="image" style="margin-top:1em;">
-                <img src="figures/periastron_claude_v_expert.png" alt="Periastron Finding: Uniform vs. Expert (Fig A1 from Appendix)"/>
-                <figcaption class="has-text-centered" style="font-style: italic;">Figure A.1 (from Appendix): Comparison of observation strategies for finding periastron. Claude 3.5 Sonnet with uniform sampling (left) misses the periastron (93% error). An expert solution (right) adaptively samples to achieve 2% error.</figcaption>
-              </figure>
-            </div>
-          </div>
+        <script>
+          function toggleTrace() {
+            var traceContainer = document.getElementById('trace-image-container');
+            if (traceContainer.style.display === 'none') {
+              traceContainer.style.display = 'block';
+            } else {
+              traceContainer.style.display = 'none';
+            }
+          }
+        </script>
+        <!-- End Expandable Trace Image -->
 
-          <h4 class="title is-4 has-text-centered" style="margin-top:1em;">Failure Modes</h4>
-          <p>
-            Models often incorrectly assume system symmetries (e.g., center of mass at origin) or neglect system drift (proper motion). They also tend to take shortcuts, like assuming stellar masses instead of deriving them. For instance, GPT-4o makes mass assumptions in 33% of incorrect solutions versus 5% of correct ones. This indicates a lack of systematic derivation of intermediate quantities.
-          </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="discussion">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="narrow-text-block">
+          <h2 class="custom-heading">Limitations, Reflections, and Future Work</h2>
+          <div class="content has-text-justified">
+            <p>
+              This initial version of GravityBench focuses exclusively on gravitational two-body scenarios. While providing a controlled environment and initial rigorous testing, this restricts our benchmark to a narrow domain. Future expansions could incorporate:
+            </p>
+            <ul>
+              <li>Additional fields beyond gravitational physics (e.g., electromagnetism)</li>
+              <li>Realistic observational errors and constrained time-directional observations</li>
+              <li>Visual perception tasks for richer observational modalities</li>
+            </ul>  
+            <p>
+              Despite limitations, GravityBench strongly illuminates critical weaknesses in leading AI agents' strategic reasoning and autonomous scientific discovery. We believe it represents foundational progress—rigorously framing these necessary capabilities, transparently quantifying gaps, and providing a platform to systematically address them.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="conclusion">
   <div class="container is-max-desktop">
-    <hr/> <!-- Visual separator -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="narrow-text-block">
+          <!-- <h2 class="title is-3 has-text-centered">Conclusion</h2> -->
+          <div class="content has-text-justified">
+            <p>
+              GravityBench introduces rigorous, ground-truthed evaluations of AI scientific discovery skills, currently revealing clear deficiencies in iterative reasoning under uncertainty. We encourage the community's use and further development of GravityBench to gradually close these critical reasoning and strategy gaps, enabling meaningful progress toward autonomous scientific discovery in AI.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <hr/> <!-- Visual separator -->
-  </div>
-</section>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title is-3 has-text-centered">BibTeX</h2>
-    <pre><code>@article{koblischke2025gravitybench,
-  author    = {Nolan Koblischke and Hyunseok Jang and Kristen Menou and Mohamad Ali-Dib},
-  title     = {Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents},
-  journal   = {arXiv preprint arXiv:xxxx.xxxxx}, % Placeholder: Add arXiv ID when available
-  year      = {2025} % Or actual publication year
+    <div style="position: relative;">
+      <pre id="bibtex-content"><code>@misc{koblischke2025gravitybench,
+      title={Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents},
+      author={Koblischke, Nolan and Jang, Hyunseok and Menou, Kristen and Ali-Dib, Mohamad},
+      year={2025},
+      archivePrefix={arXiv},
+      eprint={2501.18411},
+      url={https://arxiv.org/abs/2501.18411}
 }</code></pre>
+      <button id="copy-bibtex-btn" class="button is-small is-light" style="position: absolute; top: 10px; right: 10px;" onclick="copyBibTeX()">
+        <span class="icon is-small">
+          <i class="fas fa-copy"></i>
+        </span>
+        <span>Copy</span>
+      </button>
+    </div>
+    
+    <script>
+      function copyBibTeX() {
+        const bibtexText = `@misc{koblischke2025gravitybench,
+      title={Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents},
+      author={Koblischke, Nolan and Jang, Hyunseok and Menou, Kristen and Ali-Dib, Mohamad},
+      year={2025},
+      archivePrefix={arXiv},
+      eprint={2501.18411},
+      url={https://arxiv.org/abs/2501.18411}
+}`;
+        
+        navigator.clipboard.writeText(bibtexText).then(function() {
+          // Change button text temporarily to show success
+          const btn = document.getElementById('copy-bibtex-btn');
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = '<span class="icon is-small"><i class="fas fa-check"></i></span><span>Copied!</span>';
+          btn.classList.remove('is-light');
+          btn.classList.add('is-success');
+          
+          setTimeout(function() {
+            btn.innerHTML = originalHTML;
+            btn.classList.remove('is-success');
+            btn.classList.add('is-light');
+          }, 2000);
+        }, function(err) {
+          console.error('Could not copy text: ', err);
+          // Fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = bibtexText;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          const btn = document.getElementById('copy-bibtex-btn');
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = '<span class="icon is-small"><i class="fas fa-check"></i></span><span>Copied!</span>';
+          btn.classList.remove('is-light');
+          btn.classList.add('is-success');
+          
+          setTimeout(function() {
+            btn.innerHTML = originalHTML;
+            btn.classList.remove('is-success');
+            btn.classList.add('is-light');
+          }, 2000);
+        });
+      }
+    </script>
   </div>
 </section>
 

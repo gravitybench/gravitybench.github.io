@@ -108,6 +108,61 @@ body {
     height: 100%;
 }
 
+/* New style for narrowing text blocks */
+.narrow-text-block {
+  max-width: 70ch; /* A bit less squished */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Aggressive overrides to eliminate vertical gaps */
+.hero {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.hero-body {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+section {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.columns {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+.column {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.container {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.content {
+  margin-bottom: 0.5rem !important;
+}
+
+/* End of added styles */
+
+/* Custom heading style */
+.custom-heading {
+  font-size: 1em; /* Normal font size */
+  font-weight: bold;
+  text-align: left;
+  margin-top: 0.8em; /* Reduced top margin */
+  margin-bottom: 0.4em; /* Reduced bottom margin */
+}
+
 .publication-body img {
 }
 
