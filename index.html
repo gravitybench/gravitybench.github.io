@@ -84,9 +84,6 @@
       <a class="navbar-item" href="#dataset">
         Benchmark Design
       </a>
-      <a class="navbar-item" href="#leaderboard">
-        Leaderboard
-      </a>
       <a class="navbar-item" href="#results">
         Results
       </a>
@@ -127,9 +124,9 @@
             <span class="author-block"><sup style="color:#ed4b82">2</sup>New York University Abu Dhabi</span>
           </div>
 
-          <div class="has-text-centered" style="margin-top: 0.5em; margin-bottom: 0.5em;">
+          <!-- <div class="has-text-centered" style="margin-top: 0.5em; margin-bottom: 0.5em;">
             <span class="tag is-success is-large" style="background-color: #4caf50;">Accepted to ICML 2025</span>
-          </div>
+          </div> -->
         
           <!-- <section> -->
             <!-- <div class="section" id="org-banners" style="display:fle">
@@ -147,6 +144,7 @@
 
           <div class="column has-text-centered">
             <div class="publication-links">
+
               <span class="link-block">
                 <a href="https://arxiv.org/abs/2501.18411"
                    class="external-link button is-normal is-rounded is-dark"
@@ -178,12 +176,13 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="#leaderboard"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <p style="font-size:18px">📊</p>
+                <a href="https://icml.cc/virtual/2025/poster/45046"
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank">
+                  <span class="icon" style="margin-right: 0.5em;">
+                    <img src="static/images/icmllogo.png" alt="ICML Logo" style="height:1.5em;vertical-align:middle;">
                   </span>
-                  <span>Leaderboard</span>
+                  <span>Accepted to ICML 2025</span>
                 </a>
               </span>
               <!-- Twitter Link. -->
@@ -351,32 +350,6 @@
             </ul>
           </div>
         </div>
-        
-        <!-- Expandable Trace Image -->
-        <div style="margin-top: 0.5em; margin-bottom: 0.5em;">
-          <p class="content is-size-6 narrow-text-block" style="margin-bottom: 0.4em;">The trace below shows two illustrative observation-planning runs by Claude 3.5 Sonnet attempting to find the maximum stellar velocity with a 40-observation budget: one run systematically refines its estimate to achieve 2% error, while the other misinterprets velocity estimates from finer time resolution and incurs a 45% error due to poorly targeted subsequent observations.</p>
-          <div class="has-text-left narrow-text-block" style="margin-bottom: 0.2em;">
-            <button class="button is-light is-small" onclick="toggleTrace()">See trace</button>
-          </div>
-          <div id="trace-image-container" style="display: none; margin-top: 0.2em;">
-            <figure class="image">
-              <img src="figures/traces.png" alt="Example Trace from Analysis" />
-            </figure>
-          </div>
-        </div>
-
-        <script>
-          function toggleTrace() {
-            var traceContainer = document.getElementById('trace-image-container');
-            if (traceContainer.style.display === 'none') {
-              traceContainer.style.display = 'block';
-            } else {
-              traceContainer.style.display = 'none';
-            }
-          }
-        </script>
-        <!-- End Expandable Trace Image -->
-
       </div>
     </div>
   </div>
@@ -610,7 +583,7 @@
                                             href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative
         Commons Attribution-ShareAlike 4.0 International License</a>.
       </p>
-      <p>Please contact <a href="mailto:nolan.koblischke@mail.utoronto.ca">Nolan Koblischke</a> or <a href="mailto:kristen.menou@utoronto.ca">Kristen Menou</a> with any questions or feedback.</p>
+      <p>Please contact <a href="https://nolank.ca/">Nolan Koblischke</a> or <a href="mailto:kristen.menou@utoronto.ca">Kristen Menou</a> with any questions or feedback.</p>
     </div>
 </footer>
 
