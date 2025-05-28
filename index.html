@@ -87,6 +87,11 @@
         font-size: 2.2rem !important;
       }
     }
+    
+    /* Reduce section spacing after tables */
+    .section:has(.table-container) + .section {
+      padding-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -273,11 +278,11 @@
         <!-- <h2 class="title is-3" id="leaderboard">Leaderboard for GravityBench</h2> -->
         <div class="content">
 
-          <h3 class="title is-4" style="font-size: 0.875rem;">100 Observation Budget (budget-obs-100)</h3>
-          <div id="leaderboard_budget_obs" class="table-container"></div>
+          <h3 class="title is-4" style="font-size: 0.875rem; margin-bottom: 0.25rem; margin-top: -0.5rem;">AI provided a 100 obseravation budget</h3>
+          <div id="leaderboard_budget_obs" class="table-container" style="margin-top: 0;"></div>
 
-          <h3 class="title is-4" style="margin-top: 1em; font-size: 0.875rem;">Full Table of Observations (full-obs)</h3>
-          <div id="leaderboard_full_obs" class="table-container"></div>
+          <h3 class="title is-4" style="margin-top: 0.5rem; font-size: 0.875rem; margin-bottom: 0.25rem;">AI provided full table of observations</h3>
+          <div id="leaderboard_full_obs" class="table-container" style="margin-top: 0; margin-bottom: -1rem;"></div>
 
           <script>
             function generateGravityBenchTable(data, tableId) {
