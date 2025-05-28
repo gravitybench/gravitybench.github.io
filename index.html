@@ -272,9 +272,6 @@
       <div class="column is-full has-text-centered content">
         <!-- <h2 class="title is-3" id="leaderboard">Leaderboard for GravityBench</h2> -->
         <div class="content">
-          <p class="mt-3">Performance of baseline AI agents on <b>GravityBench</b> tasks.
-            <br>Results are averaged over three runs with standard errors shown.
-          </p>
 
           <h3 class="title is-4" style="font-size: 0.875rem;">100 Observation Budget (budget-obs-100)</h3>
           <div id="leaderboard_budget_obs" class="table-container"></div>
@@ -424,7 +421,7 @@
           </div>
           <figure class="image" style="margin-top:1em;">
             <img src="figures/Simulations.png" alt="Overview of Simulations (Fig 2)"/>
-            <figcaption class="has-text-centered" style="font-style: italic;">Figure 2: Overview of the gravitational simulations used in the benchmark. Each panel shows orbital trajectories with masses in $M_\odot$. Color indicates time. Includes standard orbits, unbound systems, modified gravity, drag forces, proper motion, and varied units.</figcaption>
+            <figcaption class="has-text-centered" style="font-style: italic;">Figure 2: Overview of the gravitational simulations used in the benchmark. Each panel shows orbital trajectories with masses in solar masses. Color indicates time. Includes standard orbits, unbound systems, modified gravity, drag forces, proper motion, and varied units.</figcaption>
           </figure>
         </div>
     </div>
@@ -531,10 +528,13 @@
 
 
 <section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title is-3 has-text-centered">BibTeX</h2>
-    <div style="position: relative;">
-      <pre id="bibtex-content"><code>@misc{koblischke2025gravitybench,
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="narrow-text-block">
+          <h2 class="title is-3 has-text-centered">BibTeX</h2>
+          <div style="position: relative;">
+            <pre id="bibtex-content"><code>@misc{koblischke2025gravitybench,
       title={Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents},
       author={Koblischke, Nolan and Jang, Hyunseok and Menou, Kristen and Ali-Dib, Mohamad},
       year={2025},
@@ -542,62 +542,16 @@
       eprint={2501.18411},
       url={https://arxiv.org/abs/2501.18411}
 }</code></pre>
-      <button id="copy-bibtex-btn" class="button is-small is-light" style="position: absolute; top: 10px; right: 10px;" onclick="copyBibTeX()">
-        <span class="icon is-small">
-          <i class="fas fa-copy"></i>
-        </span>
-        <span>Copy</span>
-      </button>
+            <button id="copy-bibtex-btn" class="button is-small is-light" style="position: absolute; top: 10px; right: 10px;" onclick="copyBibTeX()">
+              <span class="icon is-small">
+                <i class="fas fa-copy"></i>
+              </span>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <script>
-      function copyBibTeX() {
-        const bibtexText = `@misc{koblischke2025gravitybench,
-      title={Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents},
-      author={Koblischke, Nolan and Jang, Hyunseok and Menou, Kristen and Ali-Dib, Mohamad},
-      year={2025},
-      archivePrefix={arXiv},
-      eprint={2501.18411},
-      url={https://arxiv.org/abs/2501.18411}
-}`;
-        
-        navigator.clipboard.writeText(bibtexText).then(function() {
-          // Change button text temporarily to show success
-          const btn = document.getElementById('copy-bibtex-btn');
-          const originalHTML = btn.innerHTML;
-          btn.innerHTML = '<span class="icon is-small"><i class="fas fa-check"></i></span><span>Copied!</span>';
-          btn.classList.remove('is-light');
-          btn.classList.add('is-success');
-          
-          setTimeout(function() {
-            btn.innerHTML = originalHTML;
-            btn.classList.remove('is-success');
-            btn.classList.add('is-light');
-          }, 2000);
-        }, function(err) {
-          console.error('Could not copy text: ', err);
-          // Fallback for older browsers
-          const textArea = document.createElement('textarea');
-          textArea.value = bibtexText;
-          document.body.appendChild(textArea);
-          textArea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textArea);
-          
-          const btn = document.getElementById('copy-bibtex-btn');
-          const originalHTML = btn.innerHTML;
-          btn.innerHTML = '<span class="icon is-small"><i class="fas fa-check"></i></span><span>Copied!</span>';
-          btn.classList.remove('is-light');
-          btn.classList.add('is-success');
-          
-          setTimeout(function() {
-            btn.innerHTML = originalHTML;
-            btn.classList.remove('is-success');
-            btn.classList.add('is-light');
-          }, 2000);
-        });
-      }
-    </script>
   </div>
 </section>
 
@@ -618,6 +572,55 @@
       <p>Please contact <a href="https://nolank.ca/">Nolan Koblischke</a> or <a href="mailto:kristen.menou@utoronto.ca">Kristen Menou</a> with any questions or feedback.</p>
     </div>
 </footer>
+
+<script>
+  function copyBibTeX() {
+    const bibtexText = `@misc{koblischke2025gravitybench,
+    title={Gravity-Bench-v1: A Benchmark on Gravitational Physics Discovery for Agents},
+    author={Koblischke, Nolan and Jang, Hyunseok and Menou, Kristen and Ali-Dib, Mohamad},
+    year={2025},
+    archivePrefix={arXiv},
+    eprint={2501.18411},
+    url={https://arxiv.org/abs/2501.18411}
+  }`;
+    
+    navigator.clipboard.writeText(bibtexText).then(function() {
+      // Change button text temporarily to show success
+      const btn = document.getElementById('copy-bibtex-btn');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<span class="icon is-small"><i class="fas fa-check"></i></span><span>Copied!</span>';
+      btn.classList.remove('is-light');
+      btn.classList.add('is-success');
+      
+      setTimeout(function() {
+        btn.innerHTML = originalHTML;
+        btn.classList.remove('is-success');
+        btn.classList.add('is-light');
+      }, 2000);
+    }, function(err) {
+      console.error('Could not copy text: ', err);
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = bibtexText;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      const btn = document.getElementById('copy-bibtex-btn');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<span class="icon is-small"><i class="fas fa-check"></i></span><span>Copied!</span>';
+      btn.classList.remove('is-light');
+      btn.classList.add('is-success');
+      
+      setTimeout(function() {
+        btn.innerHTML = originalHTML;
+        btn.classList.remove('is-success');
+        btn.classList.add('is-light');
+      }, 2000);
+    });
+  }
+</script>
 
 </body>
 </html>
