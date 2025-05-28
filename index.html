@@ -65,6 +65,29 @@
   <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <!-- <script src="./visualizer/data/data_public.js" defer></script> --> <!-- Removed -->
+
+  <style>
+    /* Mobile-friendly table styles */
+    @media screen and (max-width: 768px) {
+      .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .table-container table {
+        font-size: 0.6rem !important;
+        width: auto !important;
+        margin: 0 auto !important;
+      }
+      .table-container th,
+      .table-container td {
+        padding: 0.25rem !important;
+        white-space: nowrap;
+      }
+      .title.is-1 {
+        font-size: 2.2rem !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -100,9 +123,9 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title is-bold" style="display: flex; align-items: center; justify-content: center;">
+          <h1 class="title is-1 publication-title is-bold" style="display: flex; align-items: center; justify-content: center; font-size: 2.7rem;">
             <span style="vertical-align: middle; margin-right: 0.3em;">GravityBench</span>
-            <img src="static/images/gbenchlogotransparent.png" alt="@gbenchlogotransparent.png" style="height:1.5em;vertical-align:middle;margin-left:-0.2em;">
+            <img src="static/images/gbenchlogotransparent.png" alt="@gbenchlogotransparent.png" style="height:1.35em;vertical-align:middle;margin-left:-0.2em;">
           </h1>
           <h2 class="subtitle is-3 publication-subtitle">
             A Benchmark on Gravitational Physics Discovery for Agents
@@ -228,7 +251,13 @@
           <!-- <h2 class="title is-3">Abstract</h2> -->
           <div class="content has-text-justified">
             <p>
-              <strong>Abstract:</strong> GravityBench is an environment-based benchmark designed to evaluate the abilities of AI agents to autonomously discover gravitational physics. It challenges agents to engage in a full cycle of scientific discovery, including hypothesis formation, experimental planning under limited resources, data analysis, and evidence-driven reasoning. GravityBench features physics simulations that deviate from real-world gravitational laws, allowing robust evaluation of agent generalization. Baseline experiments indicate current leading AI models struggle significantly with planning strategically under uncertainty. GravityBench aims to provide clear, rigorous insight into agents' capabilities and limitations in scientific reasoning and discovery.
+              <strong>Abstract:</strong> Modern science emerged from reasoning over repeatedly-observed planetary motions. We present Gravity-Bench-v1, an environment-based benchmark that challenges AI agents on tasks that parallel this historical development. Gravity-Bench-v1 evaluates agents on the discovery of physics concealed within a dynamic environment, using rigorous gravitational dynamics simulations.
+            </p>
+            <p>
+              Gravity-Bench includes out-of-distribution cases, i.e. with physics that deviates from the real world, to evaluate true scientific generalization capabilities. Agents must plan to collect data within an experimental budget and must perform a dynamic form of data analysis and reasoning to solve tasks efficiently. Our benchmark admits an open-ended space of solutions.
+            </p>
+            <p>
+              Technically at an upper-undergraduate level, our benchmark proves challenging to baseline AI agents. Gravity-Bench-v1 and planned extensions should help map out AI progress towards scientific discovery capabilities.
             </p>
           </div>
         </div>
@@ -243,14 +272,14 @@
       <div class="column is-full has-text-centered content">
         <!-- <h2 class="title is-3" id="leaderboard">Leaderboard for GravityBench</h2> -->
         <div class="content">
-          <p class="mt-3">Performance of baseline AI agents on <b>GravityBench</b> tasks, based on Table 1 from the paper.
+          <p class="mt-3">Performance of baseline AI agents on <b>GravityBench</b> tasks.
             <br>Results are averaged over three runs with standard errors shown.
           </p>
 
-          <h3 class="title is-4">100 Observation Budget (budget-obs-100)</h3>
+          <h3 class="title is-4" style="font-size: 0.875rem;">100 Observation Budget (budget-obs-100)</h3>
           <div id="leaderboard_budget_obs" class="table-container"></div>
 
-          <h3 class="title is-4" style="margin-top: 1em;">Full Table of Observations (full-obs)</h3>
+          <h3 class="title is-4" style="margin-top: 1em; font-size: 0.875rem;">Full Table of Observations (full-obs)</h3>
           <div id="leaderboard_full_obs" class="table-container"></div>
 
           <script>
@@ -259,17 +288,23 @@
                 document.getElementById(tableId).innerHTML = "<p>Data not available.</p>";
                 return;
               }
-              let tableHtml = '<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">';
+              let tableHtml = '<table class="table is-bordered is-striped is-narrow is-hoverable" style="font-size: 0.7rem; width: auto; margin: 0 auto;">';
               tableHtml += '<thead><tr>';
               const headers = Object.keys(data[0]);
-              headers.forEach(header => {
+              
+              // Filter out "mean obs" column for full obs table
+              const filteredHeaders = tableId === 'leaderboard_full_obs' 
+                ? headers.filter(header => header !== 'Mean Observations Used')
+                : headers;
+              
+              filteredHeaders.forEach(header => {
                 tableHtml += `<th>${header}</th>`;
               });
               tableHtml += '</tr></thead>';
               tableHtml += '<tbody>';
               data.forEach(row => {
                 tableHtml += '<tr>';
-                headers.forEach(header => {
+                filteredHeaders.forEach(header => {
                   // Bold the best performance in each table
                   let cellContent = row[header];
                   if (tableId === 'leaderboard_budget_obs' && header === 'Performance' && row.Model === 'o4-mini-high-2025-04-16') {
@@ -295,12 +330,6 @@
             });
           </script>
 
-          <b>Task types:</b> Refer to paper Section 3.2 and Appendix B for details on scientific problems.
-          <br>
-          <b>Evaluation:</b> Refer to paper Section 4.1 for evaluation details and thresholding.
-          <br>
-          <br>
-
         </div>
       </div>
     </div>
@@ -315,21 +344,21 @@
           <!-- <h2 class="title is-3">Introduction</h2> -->
           <div class="content has-text-justified">
             <p>
-              Recent AI advances have substantially improved performance in language, math, and even scientific literature analysis. However, genuine "scientific reasoning", involving iterative hypothesis testing, active experimentation, and systematic data-driven inference under meaningful uncertainty, remains poorly understood. Understanding agents' capabilities for scientific discovery is practically crucial—it could enable autonomous scientific progress or highlight serious limitations of existing architectures.
+              Traditional benchmarks, such as those focused on knowledge evaluation or general problem-solving capabilities, fall short of what is needed when it comes to evaluating an AI agent's capacity for discovery under normal scientific conditions of uncertainty and novelty.
             </p>
             
             <p>
-              This paper introduces GravityBench, a controlled environment benchmark rigorously designed to evaluate the capability of AI agents in discovering gravitational physics. GravityBench challenges agents to actively reason about observations, plan strategically under resource constraints, and generalize beyond familiar textbook knowledge.
+              To address this gap, we introduce GravityBench, a new benchmark specifically designed to evaluate the scientific reasoning and discovery capabilities of AI agents within a controlled, physics-based environment. This benchmark is inspired by the historical development of science (the two-body problem of gravitational dynamics) and leverages high-fidelity machine-precision simulation tools to build an environment where AI agents can interact with and explore a two-body gravitational system.
             </p>
             
             <p>
-              We believe current limitations in these areas reflect profound gaps in AI agents' understanding of the scientific discovery process itself. To help the community characterize and ultimately bridge these gaps, we contribute GravityBench as a carefully designed, transparent, and fully open-source platform.
+              GravityBench challenges agents to actively reason about observations, plan strategically under resource constraints, and generalize beyond familiar textbook knowledge. We believe current limitations in these areas show gaps in AI agents' understanding of the scientific discovery process.
             </p>
           </div>
         </div>
         <div class="content has-text-centered" style="margin-top: 1em; margin-bottom: 1em;">
           <img src="figures/flowchart5.png" alt="GravityBench Flowchart" width="80%"/>
-          <p><b>Overview of GravityBench architecture and workflow.</b> (Corresponds to Figure 1 in the paper)</p>
+          <p><b>Overview of GravityBench architecture and workflow.</b></p>
         </div>
       </div>
     </div>
@@ -344,10 +373,9 @@
           <h2 class="custom-heading">Novel Contributions</h2>
           <div class="content has-text-justified">
             <ul>
-              <li><strong>Rigorous Simulated Environment:</strong> GravityBench uses high-precision gravitational simulations designed specifically to evaluate scientific reasoning and discovery.</li>
-              <li><strong>Comprehensive Evaluation of Scientific Reasoning:</strong> Extends evaluation beyond standard question-answering to include experimental design, iterative data collection, and dealing with uncertainty.</li>
-              <li><strong>Robust Generalization Tests:</strong> Introduces tasks requiring agents to reason effectively in scenarios explicitly outside standard physics (e.g., modified gravitational laws), enabling clearer measurement of agents' ability to generalize scientifically rather than memorizing common textbook results.</li>
-              <li><strong>Direct Benchmarking against Expert Solutions:</strong> Provides expert (PhD-level astrophysics) reference solutions, enabling precise scoring and interpretability of agents' errors and strengths.</li>
+              <li>Evaluating both <strong>scientific problem solving with code</strong> and <strong>observational planning ability</strong> under a budget constraint.</li>
+              <li><strong>Simulation-based environment</strong> for evaluating scientific knowledge that can be expanded to other fields of physics.</li>
+              <li>Introducing tasks requiring agents to reason in scenarios <strong>outside standard physics</strong> (e.g., modified gravitational laws), enabling clearer measurement of agents' ability to generalize scientifically rather than memorizing common textbook results.</li>
             </ul>
           </div>
         </div>
@@ -386,6 +414,10 @@
               </p>
 
               <p>
+                Our range of tasks include challenging problems: such as determining how we modified gravity or determining the coefficient of drag that has been added to the system.
+              </p>
+
+              <p>
                 We define problem-specific accuracy thresholds based on comparison to expert solutions, modeling realistic experimental limitations rather than arbitrary correctness criteria.
               </p>
             </div>
@@ -408,16 +440,12 @@
           <h2 class="custom-heading">Key Experimental Results and Insights</h2>
           <div class="content has-text-justified">
             <p>
-              Our experiments with baseline agents—including state-of-the-art models GPT-4o and Claude 3.5—show these systems consistently fail at careful experimental planning, significantly underusing their observation budgets. Overall performance dropped drastically when limited by observation budgets:
+              Our experiments show that current AI models consistently fail at careful experimental planning, significantly underusing their observation budgets.
+              <strong>Under full-data access:</strong> The top model (o4-mini-high) achieved 74%. However when limited to a <strong>100 observation budget:</strong> performance dropped to 49%, highlighting significant weaknesses in strategic reasoning.
             </p>
 
-            <ul>
-              <li><strong>Under full-data access:</strong> The top model (o4-mini-high) achieved 74%, demonstrating moderate baseline capabilities in reasoning given abundant data.</li>
-              <li><strong>Under limited observation budget:</strong> Performance dropped sharply, highlighting significant weaknesses in active information gathering and strategic reasoning under uncertainty.</li>
-            </ul>
-
             <p>
-              Detailed qualitative analysis identified problematic shortcuts such as unjustified assumptions of symmetry and ungrounded physical constants (e.g. arbitrary mass assumptions). These systematic errors illustrate deeper misunderstandings of the iterative, uncertainty-driven nature of realistic scientific discovery.
+              The models tended to rush to solutions. This included: 1) not using their full observation budget and 2) assuming physical constants rather than deriving them (e.g. assuming the mass of a star is 1 gram).
             </p>
 
             <p>
@@ -461,19 +489,16 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="narrow-text-block">
-          <h2 class="custom-heading">Limitations, Reflections, and Future Work</h2>
+          <h2 class="custom-heading">Future Work</h2>
           <div class="content has-text-justified">
             <p>
-              This initial version of GravityBench focuses exclusively on gravitational two-body scenarios. While providing a controlled environment and initial rigorous testing, this restricts our benchmark to a narrow domain. Future expansions could incorporate:
+              This initial version of GravityBench focuses exclusively on gravitational two-body scenarios. Future expansions will incorporate:
             </p>
             <ul>
               <li>Additional fields beyond gravitational physics (e.g., electromagnetism)</li>
-              <li>Realistic observational errors and constrained time-directional observations</li>
-              <li>Visual perception tasks for richer observational modalities</li>
+              <li>Visual perception</li>
+              <li>Realistic observational errors</li>
             </ul>  
-            <p>
-              Despite limitations, GravityBench strongly illuminates critical weaknesses in leading AI agents' strategic reasoning and autonomous scientific discovery. We believe it represents foundational progress—rigorously framing these necessary capabilities, transparently quantifying gaps, and providing a platform to systematically address them.
-            </p>
           </div>
         </div>
       </div>
@@ -489,7 +514,13 @@
           <!-- <h2 class="title is-3 has-text-centered">Conclusion</h2> -->
           <div class="content has-text-justified">
             <p>
-              GravityBench introduces rigorous, ground-truthed evaluations of AI scientific discovery skills, currently revealing clear deficiencies in iterative reasoning under uncertainty. We encourage the community's use and further development of GravityBench to gradually close these critical reasoning and strategy gaps, enabling meaningful progress toward autonomous scientific discovery in AI.
+              Looking ahead, GravityBench-like approaches have significant potential for growth as tools for advancing AI research in scientific reasoning. By expanding the benchmark to include incrementally more complex physics, one can aim to map out progress toward AI systems capable of genuine contributions to science.
+            </p>
+            <p>
+              This type of benchmarks with controlled environment and open-ended solution space may provide opportunities to characterize the robustness of autonomous AI agents in handling novel and uncertain scenarios, an issue connected to safety.
+            </p>
+            <p>
+              Adapting environments like GravityBench for reinforcement learning has the potential to serve as a stepping stone towards building AI agentic systems that not only analyze but also explore and innovate in the domain of scientific discovery.
             </p>
           </div>
         </div>
